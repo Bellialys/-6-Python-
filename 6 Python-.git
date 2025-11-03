@@ -1,0 +1,97 @@
+# Перше завдання
+import random
+
+
+def maxOfTwo(a, b):
+    if a > b:
+        print(a)
+    elif a < b:
+        print(b)
+    else:
+        print("Неочікуваний ввод чисел, вони рівні між собою")
+
+
+a = float(input("Введіть перше число: "))
+b = float(input("Введіть друге число: "))
+maxOfTwo(a, b)
+
+
+# Друге завдання
+def checkOddEven(n):
+    try:
+        n = n.replace(',', '.')  # автоматично замінює кому на крапку
+        n = float(n)
+        if n <= 0:
+            print("Неправильне значення аргументу")
+        elif n.is_integer():
+            if n % 2 == 0:
+                print("Число парне")
+            else:
+                print("Число непарне")
+        else:
+            print("Це не ціле число, тому парність неможливо визначити")
+    except (ValueError, TypeError):
+        print("Неправильне значення аргументу")
+
+
+n = input("Введіть число для перевірки парності: ")
+checkOddEven(n)
+
+
+# Третє завдання
+
+m = int(input("Введіть кількість елементів списку n: "))
+numbers = [random.randint(-10, 10) for _ in range(m)]
+print("Початковий список:", numbers)
+
+reordered = [x for x in numbers if x >= 0] + [x for x in numbers if x < 0]
+print("Список (спочатку невід’ємні, потім від’ємні):", reordered)
+
+non_zero = [x for x in numbers if x != 0]
+zeros = [x for x in numbers if x == 0]
+moved_zeros = non_zero + zeros
+print("Список (нулі перенесено у кінець):", moved_zeros)
+
+
+# Четверте завдання
+def is_palindrome(s: str) -> bool:
+    cleaned = ''.join(ch.lower() for ch in s if ch != ' ')
+    return cleaned == cleaned[::-1]
+
+
+input_str = input("Введіть рядок для перевірки на паліндром: ")
+if is_palindrome(input_str):
+    print("Це паліндром")
+else:
+    print("Це не паліндром")
+
+
+# П'яте завдання
+
+def factorial(n: int) -> int:
+    if n < 0:
+        raise ValueError("Факторіал не визначений для від’ємних чисел")
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+
+def combinations(n: int, k: int) -> int:
+    if k < 0 or k > n:
+        raise ValueError("k має бути в межах від 0 до n")
+    return factorial(n) // (factorial(k) * factorial(n - k))
+
+
+num = int(input("Введіть число для обчислення факторіалу: "))
+try:
+    print(f"Факторіал {num} дорівнює {factorial(num)}")
+except ValueError as e:
+    print(e)
+
+n = int(input("\nВведіть n (загальну кількість елементів): "))
+k = int(input("Введіть k (кількість елементів у комбінації): "))
+try:
+    print(f"Кількість комбінацій ({n}, {k}) = {combinations(n, k)}")
+except ValueError as e:
+    print(e)
